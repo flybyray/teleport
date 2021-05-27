@@ -314,12 +314,12 @@ func (p *Profile) TLSCAsPath() string {
 
 // SSHDir returns the path to the profile's ssh directory.
 func (p *Profile) SSHDir() string {
-	return filepath.Join(p.UserKeyDir(), p.Username+constants.SSHDirSuffix)
+	return p.UserKeyDir()
 }
 
 // SSHCertPath returns the path to the profile's ssh certificate.
 func (p *Profile) SSHCertPath() string {
-	return filepath.Join(p.SSHDir(), p.SiteName+constants.FileExtSSHCert)
+	return filepath.Join(p.SSHDir(), p.Username+constants.FileExtSSHCert)
 }
 
 // SSHCAsPath returns the path to the profile's ssh certificate authorities.

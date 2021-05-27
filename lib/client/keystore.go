@@ -176,7 +176,7 @@ func (fs *FSLocalKeyStore) AddKey(key *Key) error {
 	}
 
 	// Store per-cluster key data.
-	if err := fs.writeBytes(key.Cert, inProxyHostDir(key.Username+constants.SSHDirSuffix, key.ClusterName+constants.FileExtSSHCert)); err != nil {
+	if err := fs.writeBytes(key.Cert, inProxyHostDir(key.Username+constants.FileExtSSHCert)); err != nil {
 		return trace.Wrap(err)
 	}
 	// TODO(awly): unit test this.
@@ -384,9 +384,9 @@ var WithAllCerts = []CertOption{WithSSHCerts{}, WithKubeCerts{}, WithDBCerts{}, 
 type WithSSHCerts struct{}
 
 func (o WithSSHCerts) relativeCertPath(idx KeyIndex) string {
-	components := []string{idx.ProxyHost, idx.Username + constants.SSHDirSuffix}
+	components := []string{idx.ProxyHost}
 	if idx.ClusterName != "" {
-		components = append(components, idx.ClusterName+constants.FileExtSSHCert)
+		components = append(components, idx.Username+constants.FileExtSSHCert)
 	}
 	return filepath.Join(components...)
 }
