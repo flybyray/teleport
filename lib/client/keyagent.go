@@ -178,10 +178,10 @@ func (a *LocalKeyAgent) LoadKey(key Key) (*agent.AddedKey, error) {
 	}
 
 	// remove any keys that the user may already have loaded
-	err = a.UnloadKey()
-	if err != nil {
-		return nil, trace.Wrap(err)
-	}
+	// err = a.UnloadKey()
+	// if err != nil {
+	// 	return nil, trace.Wrap(err)
+	// }
 
 	// iterate over all teleport and system agent and load key
 	for _, agent := range agents {
